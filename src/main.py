@@ -3,15 +3,6 @@ from csv_handler import get_all_crops, insert_crop, delete_crop
 from model.crop import Crop
 crops: list[Crop] = []
 
-
-#  print("\n--- FARMTCH SOLUTIONS - MENU ---")
-#     print("1. Inserir Dados (Entrada)")
-#     print("2. Listar Dados (Saída)")
-#     print("3. Atualizar Dados")
-#     print("4. Deletar Dados")
-#     print("5. Sair e Gerar Arquivo para o R")
-#     return input("Escolha uma opção: ").strip()
-
 def list_crops():
     if not crops:
         print("\nNenhum dado cadastrado foi encontrado.")
@@ -47,14 +38,11 @@ def update_crop():
     crop = crops[index]
     
     
-
-
 if __name__ == "__main__":
     crops = get_all_crops()
     exit = False
     while not exit:
         option = main_menu()
-
         if option == '1':
             x = 1
         elif option == '2':
@@ -64,6 +52,8 @@ if __name__ == "__main__":
         elif option == '4':
             delete_crop()
         elif option == '5':
+            x = 5
+        elif option == '6':
             print('Programa está finalizando')
             exit = True
         else:

@@ -7,6 +7,7 @@ def main_menu():
     print("2. Listar Dados (Saída)")
     print("3. Atualizar Dados")
     print("4. Deletar Dados")
-    print("5. Sair e Gerar Arquivo para o R")
+    print("5. Atualizar arquivo CSV")
+    print("6. Sair")
     print('='*50)
     return input("Escolha uma opção: ").strip()

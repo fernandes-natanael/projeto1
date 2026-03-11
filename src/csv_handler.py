@@ -41,7 +41,6 @@ def insert_crop(crop: Crop) -> None:
 
 def update_crop(updated_crop: Crop) -> bool:
     df = pd.read_csv(CSV_FILE)
-    
     target_id = str(updated_crop.id)
     
     if target_id not in df['id'].values:

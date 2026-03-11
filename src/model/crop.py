@@ -1,9 +1,8 @@
-import uuid
 from dataclasses import dataclass
 
 @dataclass
 class Crop:
-    id: uuid.UUID
+    id: int
     type: str
     area: float
     input_management: float

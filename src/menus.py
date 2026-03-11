@@ -1,8 +1,8 @@
 
 
 def main_menu():
-    print('='*50)
-    print("\n--- FARMTCH SOLUTIONS - MENU ---")
+    print(f'\n{"="*50}')
+    print("--- FARMTCH SOLUTIONS - MENU ---")
     print("1. Inserir Dados (Entrada)")
     print("2. Listar Dados (Saída)")
     print("3. Atualizar Dados")

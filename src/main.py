@@ -1,3 +1,5 @@
+from farm_math_handler import mango_handler, sugar_cane_handler
+from input_handler import handle_cultura_input, handle_index
 from menus import main_menu 
 from csv_handler import get_all_crops, update_all_crops_in_csv
 from model.crop import Crop
@@ -9,105 +11,64 @@ def list_crops():
         print("\nNenhum dado cadastrado foi encontrado.")
         return
 
-    print("\nLista de Dados:")
-    for index, crop in enumerate(crops):
-        print(f'== idx: {crop.id},  Tipo: {crop.type}, Área: {crop.area}, Manejo de Insumos: {crop.input_management}')
+    print("Lista de Dados:")
+    for crop in crops:
+        medida_insumo = "L" if crop.area_type == "Retangulo" else "kg"
+        print(f'== idx: {crop.id},  Tipo: {crop.type}, Tipo de Area: {crop.area_type}, Área: {crop.area:.2f} m², Total de Insumos: {crop.input_management:.2f} {medida_insumo}')
 
 def delete_crop():
-    id_input = input('Qual o ID do dado que você deseja remover?\n:').strip()    
-    if not id_input.isdigit():
-        print(f'[Error] ID "{id_input}" não é um número válido.')
-        return
-        
-    target_id = int(id_input)
+    target_id = handle_index('Qual o ID do dado que você deseja remover?:')
     
     for i, crop in enumerate(crops):
         if crop.id == target_id:
             del crops[i]
-            print(f"[System] Cultura com ID {target_id} deletada com sucesso.")
+            print(f"Cultura com ID {target_id} deletada com sucesso.")
             return
-    print(f'[Error] Cultura com ID {target_id} não foi encontrada no sistema.')
+    print(f'[Error]Cultura com ID {target_id} não foi encontrada no sistema.')
 
 def update_crop():
-    index = input('Qual o index do dado que você deseja atualizar?\n:').strip()
-    if not index.isdigit():
-        print(f'[Error] ID "{index}" não é um número válido.')
-        return
-    target_id = int(index)
+    target_id = handle_index('Qual o ID do dado que você deseja atualizar?\n:')
 
     crop = next((c for c in crops if c.id == target_id), None)
     
     if not crop:
-        print(f'[Error] Cultura com ID {target_id} não encontrada no sistema.')
+        print(f'[Error]Cultura com ID {target_id} não encontrada no sistema.')
         return
 
-    while True:
-        cultura = input("Tipo de cultura (Manga/Cana) ou X para voltar: ").strip().capitalize()
-        
-        if cultura in ["Manga", "Cana", "X"]:
-            break 
-        else:
-            print("[Erro] Cultura inválida. Por favor, digite 'Manga' ou 'Cana'.\n")
-    
-    if cultura == "X":
-        print(f"[System] retornando para menu principal.")
-        return
-    if cultura == "Manga":
-        width = float(input("Largura do terreno (m): "))
-        length = float(input("Comprimento do terreno (m): "))
-        street = int(input("Quantidade de ruas: "))
-        liters_per_meter = float(input("Quantidade de litros por metro quadrado (l/m^2): "))
+    type = handle_cultura_input()
 
-        area = length * width
-        input_management = street * length * liters_per_meter
-    else: 
-        B = float(input("Base maior (m): "))
-        b = float(input("Base menor (m): "))
-        height = float(input("Altura (m): "))
-        street = int(input("Quantidade de ruas: "))
-        
-        area = ((B + b) * height) / 2
-        input_management = street * height * 0.8
+    if type == "X":
+        print(f"Retornando para menu principal.")
+        return
+
+    if type == "1":
+        cultura, area_type, area, input_management = mango_handler()
+    elif type == "2": 
+        cultura, area_type, area, input_management = sugar_cane_handler()
     
     crop.area = area
+    crop.area_type = area_type
     crop.type = cultura
     crop.area = area
     crop.input_management = input_management
     
 
 def insert_crop():
-    while True:
-        cultura = input("Tipo de cultura (Manga/Cana) ou X para voltar: ").strip().capitalize()
-        
-        if cultura in ["Manga", "Cana", "X"]:
-            break 
-        else:
-            print("[Erro] Cultura inválida. Por favor, digite 'Manga' ou 'Cana'.\n")
+    type = handle_cultura_input()
 
-    # Lógica de cálculo baseada na cultura escolhida
-    if cultura == "X":
-        print(f"[System] retornando para menu principal.")
+    if type == "X":
+        print(f"Retornando para menu principal.")
         return
-    if cultura == "Manga":
-        width = float(input("Largura do terreno (m): "))
-        length = float(input("Comprimento do terreno (m): "))
-        street = int(input("Quantidade de ruas: "))
-        liters_per_meter = float(input("Quantidade de litros por metro quadrado (l/m^2): "))
 
-        area = length * width
-        input_management = street * length * liters_per_meter
-    else: 
-        B = float(input("Base maior (m): "))
-        b = float(input("Base menor (m): "))
-        height = float(input("Altura (m): "))
-        street = int(input("Quantidade de ruas: "))
-        
-        area = ((B + b) * height) / 2
-        input_management = street * height * 0.8
+    if type == "1":
+        cultura, area_type, area, input_management = mango_handler()
+    elif type == "2": 
+        cultura, area_type, area, input_management = sugar_cane_handler()
 
     nova_cultura = Crop(
-        id=len(crops),
+        id=max((c.id for c in crops), default=-1) + 1,
         type=cultura,
+        area_type=area_type,
         area=area,
         input_management=input_management
     )
@@ -116,6 +77,7 @@ def insert_crop():
     crops.append(nova_cultura)
 
     print(f"\n[Sucesso] {cultura} registrada com ID: {nova_cultura.id}")
+
     
 if __name__ == "__main__":
     crops = get_all_crops()
@@ -139,6 +101,6 @@ if __name__ == "__main__":
             print('Programa está finalizando')
             exit = True
         else:
-            print(f'Input {option} não foi definido')
+            print(f'[Error]Input {option} não foi definido')
 
 

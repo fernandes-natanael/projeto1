@@ -1,5 +1,3 @@
-
-
 def main_menu():
     print(f'\n{"="*50}')
     print("--- FARMTCH SOLUTIONS - MENU ---")

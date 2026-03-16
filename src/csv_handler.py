@@ -1,4 +1,5 @@
 import os
+
 import pandas as pd
 from model.crop import Crop
 from dataclasses import asdict, fields
@@ -11,7 +12,7 @@ def create_csv_file() -> None:
     if not os.path.exists(CSV_FILE):
         empty_df = pd.DataFrame(columns=COLUMNS)
         empty_df.to_csv(CSV_FILE, index=False, sep=CSV_SEPARATOR)
-        print(f"[System] Created new database file: {CSV_FILE}")
+        print(f"Created new database file: {CSV_FILE}")
 
 def get_all_crops() -> list[Crop]:
     create_csv_file()
@@ -21,6 +22,7 @@ def get_all_crops() -> list[Crop]:
             crop = Crop(
                 id=int(row['id']),
                 type=str(row['type']),
+                area_type=str(row['area_type']),
                 area=float(row['area']),
                 input_management=float(row['input_management'])
             )
@@ -36,7 +38,7 @@ def update_all_crops_in_csv(crops: list[Crop]) -> None:
     if not crops:
         df = pd.DataFrame(columns=COLUMNS)
         df.to_csv(CSV_FILE, index=False, sep=CSV_SEPARATOR)
-        print(f"[System] Todas as culturas foram removidas. Arquivo CSV limpo.")
+        print(f"Todas as culturas foram removidas. Arquivo CSV limpo.")
         return
 
     # Converte a lista de dataclasses para uma lista de dicionários
@@ -51,4 +53,4 @@ def update_all_crops_in_csv(crops: list[Crop]) -> None:
     df = pd.DataFrame(crop_dicts, columns=COLUMNS)
     df.to_csv(CSV_FILE, index=False, sep=CSV_SEPARATOR)
     
-    print(f"[System] Arquivo CSV atualizado com sucesso. Total de registros: {len(crops)}")
+    print(f"Arquivo CSV atualizado com sucesso. Total de registros: {len(crops)}")

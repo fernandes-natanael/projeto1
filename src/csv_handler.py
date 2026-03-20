@@ -1,12 +1,14 @@
 import os
-
-import pandas as pd
-from model.crop import Crop
 from dataclasses import asdict, fields
 
-CSV_FILE = 'farm_tech_solutions.csv'
+import pandas as pd
+
+from model.crop import Crop
+
+CSV_FILE = "farm_tech_solutions.csv"
 COLUMNS = [field.name for field in fields(Crop)]
-CSV_SEPARATOR = ';'
+CSV_SEPARATOR = ";"
+
 
 def create_csv_file() -> None:
     if not os.path.exists(CSV_FILE):
@@ -14,21 +16,23 @@ def create_csv_file() -> None:
         empty_df.to_csv(CSV_FILE, index=False, sep=CSV_SEPARATOR)
         print(f"Created new database file: {CSV_FILE}")
 
+
 def get_all_crops() -> list[Crop]:
     create_csv_file()
     df = pd.read_csv(CSV_FILE, sep=CSV_SEPARATOR)
     crops: list[Crop] = []
     for _, row in df.iterrows():
-            crop = Crop(
-                id=int(row['id']),
-                type=str(row['type']),
-                area_type=str(row['area_type']),
-                area=float(row['area']),
-                input_management=float(row['input_management'])
-            )
-            crops.append(crop)
-            
+        crop = Crop(
+            id=int(row["id"]),
+            type=str(row["type"]),
+            area_type=str(row["area_type"]),
+            area=float(row["area"]),
+            input_management=float(row["input_management"]),
+        )
+        crops.append(crop)
+
     return crops
+
 
 def update_all_crops_in_csv(crops: list[Crop]) -> None:
     """
@@ -52,5 +56,5 @@ def update_all_crops_in_csv(crops: list[Crop]) -> None:
     # Cria o novo DataFrame e sobrescreve o arquivo CSV
     df = pd.DataFrame(crop_dicts, columns=COLUMNS)
     df.to_csv(CSV_FILE, index=False, sep=CSV_SEPARATOR)
-    
+
     print(f"Arquivo CSV atualizado com sucesso. Total de registros: {len(crops)}")

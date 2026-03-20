@@ -2,11 +2,14 @@ import math
 
 from input_handler import handle_float_input, handle_int_input
 
+
 def calculate_mango_area(length, width):
     return length * width
 
+
 def calculate_sugar_cane_area(r):
-    return math.pi * (r ** 2)
+    return math.pi * (r**2)
+
 
 def mango_handler():
     cultura = "Manga"
@@ -15,7 +18,7 @@ def mango_handler():
     length = handle_float_input("Comprimento do terreno (m): ")
     street = handle_int_input("Quantidade de ruas: ")
     liters_per_meter = float(input("Quantidade de litros por metro linear (L/m): "))
-    
+
     area = calculate_mango_area(length, width)
     input_management = street * length * liters_per_meter
     return cultura, area_type, area, input_management

@@ -1,5 +1,5 @@
 def main_menu():
-    print(f'\n{"="*50}')
+    print(f"\n{'=' * 50}")
     print("--- FARMTCH SOLUTIONS - MENU ---")
     print("1. Inserir Dados (Entrada)")
     print("2. Listar Dados (Saída)")
@@ -7,5 +7,5 @@ def main_menu():
     print("4. Deletar Dados")
     print("5. Atualizar arquivo CSV")
     print("6. Sair")
-    print('='*50)
+    print("=" * 50)
     return input("Escolha uma opção: ").strip()

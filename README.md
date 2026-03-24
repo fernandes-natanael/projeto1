@@ -12,40 +12,36 @@
 
 ## 👨‍🎓 Integrantes: 
 - <a href="https://www.linkedin.com/in/natanael-fernandes-4a0054194/">Natanael Fernandes</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 2</a>
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 3</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 4</a> 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do integrante 5</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Kaio Rocha</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Gilenisson Santos</a> 
+- <a href="https://www.linkedin.com/company/inova-fusca">Felipe Lofrano</a> 
+- <a href="https://www.linkedin.com/company/inova-fusca">Jonattas Felipe</a>
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
 - <a href="https://www.linkedin.com/company/inova-fusca">Sabrina Otoni</a>
 ### Coordenador(a)
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Coordenador</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">André Godoi</a>
 
 
 ## 📜 Descrição
 
-*Descreva seu projeto com base no texto do PBL (até 600 palavras)*
+O sistema opera via linha de comando (CLI) e oferece um CRUD completo:
+- **Cadastro de Culturas:** Registro de novos plantios com cálculos automáticos de área e insumos.
+- **Listagem:** Visualização detalhada de todos os dados cadastrados (ID, Tipo, Área, Total de Insumos).
+- **Atualização:** Permite editar informações de registros existentes.
+- **Exclusão:** Remoção de registros do banco de dados.
+- **Persistência:** Salvamento automático e carregamento de dados via arquivo CSV (`csv_handler.py`).
 
 
 ## 📁 Estrutura de pastas
 
-Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
-
-- <b>.github</b>: Nesta pasta ficarão os arquivos de configuração específicos do GitHub que ajudam a gerenciar e automatizar processos no repositório.
-
-- <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
-
-- <b>config</b>: Posicione aqui arquivos de configuração que são usados para definir parâmetros e ajustes do projeto.
-
-- <b>document</b>: aqui estão todos os documentos do projeto que as atividades poderão pedir. Na subpasta "other", adicione documentos complementares e menos importantes.
-
-- <b>scripts</b>: Posicione aqui scripts auxiliares para tarefas específicas do seu projeto. Exemplo: deploy, migrações de banco de dados, backups.
-
-- <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto ao longo das 7 fases.
-
-- <b>README.md</b>: arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+- `src/main.py`: Ponto de entrada da aplicação e controle do loop principal.
+- `src/model/crop.py`: Definição da classe `Crop` (Modelo de dados).
+- `src/farm_math_handler.py`: Lógica matemática para cálculos de área e insumos específicos por cultura.
+- `src/csv_handler.py`: Gerenciamento de leitura e escrita no arquivo de dados.
+- `src/input_handler.py` & `src/menus.py`: Interface de usuário e validação de entradas.
+- `src/RScripts`: scripts de execução R.
 
 ## 🔧 Como executar o código
 
@@ -89,16 +85,8 @@ Se tudo estiver configurado corretamente, o projeto será executado no terminal.
 
 ## 🗃 Histórico de lançamentos
 
-* 0.5.0 - XX/XX/2024
-    * 
-* 0.4.0 - XX/XX/2024
-    * 
-* 0.3.0 - XX/XX/2024
-    * 
-* 0.2.0 - XX/XX/2024
-    * 
-* 0.1.0 - XX/XX/2024
-    *
+* 0.0.1 - 24/03/2026
+
 
 ## 📋 Licença
 
